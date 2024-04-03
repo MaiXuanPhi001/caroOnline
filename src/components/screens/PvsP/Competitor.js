@@ -40,10 +40,12 @@ const Competitor = ({ data, user, second, setSecond, timeOut, runTime }) => {
                     <Text
                         style={[
                             styles.player,
-                            { color: user.player === 'playerX' ? 'black' : 'red' }
+                            // { color: user.player === 'playerX' ? 'black' : 'red' }
+                            {color: 'black'}
                         ]}
                     >
-                        {user.player === 'playerX' ? 'X' : 'O'}
+                        {/* {user.player === 'playerX' ? 'X' : 'O'} */}
+                        {'X'}
                     </Text>
                 </View>
                 <View>

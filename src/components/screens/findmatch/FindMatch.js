@@ -11,22 +11,28 @@ const FindMatch = ({ navigation }) => {
     const socketRef = useRef()
 
     useEffect(() => {
-        socketRef.current = socketIOClient.connect(contants.HOSTING)
+        // socketRef.current = socketIOClient.connect(contants.HOSTING)
 
-        socketRef.current.emit('client-find-match', userInfo._id)
+        // socketRef.current.emit('client-find-match', userInfo._id)
 
-        socketRef.current.on('server-find-match', data => {
-            serverFindMatch(data)
-        })
+        // socketRef.current.on('server-find-match', data => {
+        //     serverFindMatch(data)
+        // })
 
-        socketRef.current.on('server-find-match-success', data => {
-            socketRef.current.disconnect()
-            navigation.replace('PvsP', { room: data, userInfo })
-        })
+        // socketRef.current.on('server-find-match-success', data => {
+        //     socketRef.current.disconnect()
+        //     navigation.replace('PvsP', { room: data, userInfo })
+        // })
 
-        return () => {
-            socketRef.current.disconnect();
-        };
+        // return () => {
+        //     socketRef.current.disconnect();
+        // };
+
+        const timer = setTimeout(() => {
+            navigation.replace('PvsP', { room: [], userInfo })
+        }, 0)
+
+        return () => clearTimeout(timer)
     }, [])
 
     const serverFindMatch = (data) => {

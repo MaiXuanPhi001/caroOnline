@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { getAll } from '../../Services/UserService'
 import ItemRank from './ItemRank'
+import { users } from '../../utils/users'
 
 const Rank = () => {
   const [data, setData] = useState([])
@@ -11,9 +12,10 @@ const Rank = () => {
   }, [])
 
   const getUserAPI = async () => {
-    const res = await getAll()
-    res.data.sort((a, b) => b.elo - a.elo)
-    !res.error && setData(res.data)
+    // const res = await getAll()
+    // res.data.sort((a, b) => b.elo - a.elo)
+    // !res.error && setData(res.data)
+    setData(users.sort((a, b) => b.elo - a.elo))
   }
 
   return (

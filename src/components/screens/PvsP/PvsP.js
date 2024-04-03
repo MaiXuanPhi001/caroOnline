@@ -9,6 +9,7 @@ import { contants } from '../../utils/Contants'
 import Competitor from './Competitor'
 import ModalResult from './ModalResult'
 import { doneMatch } from '../../Services/MatchService'
+import { compe } from '../../utils/users'
 
 const dataReducer = (state, action) => {
   switch (action.type) {
@@ -17,10 +18,10 @@ const dataReducer = (state, action) => {
         ...state,
         [action.player]: {
           cell: [...state[action.player].cell, action.item[0] + '' + action.item[1] + '' + action.item[2] + '' + action.item[3]],
-          column: [...state[action.player].column, action.item[0]],
-          row: [...state[action.player].row, action.item[1]],
-          lineOne: [...state[action.player].lineOne, action.item[2]],
-          lineTwo: [...state[action.player].lineTwo, action.item[3]]
+          // column: [...state[action.player].column, action.item[0]],
+          // row: [...state[action.player].row, action.item[1]],
+          // lineOne: [...state[action.player].lineOne, action.item[2]],
+          // lineTwo: [...state[action.player].lineTwo, action.item[3]]
         },
         cellArr: action.item,
         turn: state.turn === 1 ? 2 : 1,
@@ -60,35 +61,35 @@ const PvsP = ({ route, navigation }) => {
     };
   }, [])
 
-  useEffect(() => {
-    socketRef.current = socketIOClient.connect(contants.HOSTING)
-    socketRef.current.on('server-attack', data => {
-      getDataAttack(data)
-    })
+  // useEffect(() => {
+  //   socketRef.current = socketIOClient.connect(contants.HOSTING)
+  //   socketRef.current.on('server-attack', data => {
+  //     getDataAttack(data)
+  //   })
 
-    socketRef.current.on('server-done-match', data => {
-      resultMatch(data)
-    })
+  //   socketRef.current.on('server-done-match', data => {
+  //     resultMatch(data)
+  //   })
 
-    setSecondMe(20)
+  //   setSecondMe(20)
 
-    if (data.playerO.cell.length < 50) {
-      if (data.playerX.cell.length > 4 && !data.render) {
-        if (checkOne(data[me.player].column, data[me.player].row, 1, me.player)) return
-        if (checkOne(data[me.player].row, data[me.player].column, 1, me.player)) return
-        if (checkOne(data[me.player].lineOne, data[me.player].lineTwo, 2, me.player)) return
-        if (checkOne(data[me.player].lineTwo, data[me.player].lineOne, 2, me.player)) return
-      }
-    } else {
-      // draw match
-      socketRef.current.emit('client-done-match', { playerLost: competitor, room, win: false })
-    }
+  //   if (data.playerO.cell.length < 50) {
+  //     if (data.playerX.cell.length > 4 && !data.render) {
+  //       if (checkOne(data[me.player].column, data[me.player].row, 1, me.player)) return
+  //       if (checkOne(data[me.player].row, data[me.player].column, 1, me.player)) return
+  //       if (checkOne(data[me.player].lineOne, data[me.player].lineTwo, 2, me.player)) return
+  //       if (checkOne(data[me.player].lineTwo, data[me.player].lineOne, 2, me.player)) return
+  //     }
+  //   } else {
+  //     // draw match
+  //     socketRef.current.emit('client-done-match', { playerLost: competitor, room, win: false })
+  //   }
 
-    if (!data.render && data.playerX.cell.length > 0) socketRef.current.emit('client-attack', { ...data, room, id: me._id })
-    return () => {
-      socketRef.current.disconnect();
-    };
-  }, [data])
+  //   if (!data.render && data.playerX.cell.length > 0) socketRef.current.emit('client-attack', { ...data, room, id: me._id })
+  //   return () => {
+  //     socketRef.current.disconnect();
+  //   };
+  // }, [data])
 
   const checkOne = (arrOne, arrTwo, sub, field) => {
     let arrTemp = []
@@ -202,7 +203,8 @@ const PvsP = ({ route, navigation }) => {
     <ScrollView contentContainerStyle={styles.container}>
       <Competitor
         data={data}
-        user={competitor}
+        // user={competitor}
+        user={compe}
         second={secondCompetitor}
         setSecond={setSecondCompetitor}
         timeOut={timeOut}
@@ -255,14 +257,14 @@ const initData = {
     [0, 9, 9, 18], [1, 9, 10, 17], [2, 9, 11, 16], [3, 9, 12, 15], [4, 9, 13, 14], [5, 9, 14, 13], [6, 9, 15, 12], [7, 9, 16, 11], [8, 9, 17, 10], [9, 9, 18, 9]
   ],
   playerX: {
-    cell: [],
+    cell: ['6396', '6285', '74116', '75127', '561110', '45910', '25712'],
     column: [],
     row: [],
     lineOne: [],
     lineTwo: [],
   },
   playerO: {
-    cell: [],
+    cell: ['5498', '5387', '55109', '4489', '64107', '65118', '2138'],
     column: [],
     row: [],
     lineOne: [],

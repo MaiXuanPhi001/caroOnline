@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import ItemHistory from './ItemHistory'
 import { getById } from '../../Services/MatchService'
+import { matches } from '../../utils/match'
 
 const History = ({ userInfo }) => {
     const [data, setData] = useState([])
@@ -11,8 +12,9 @@ const History = ({ userInfo }) => {
     }, [])
 
     const getMatchAPI = async () => {
-        const res = await getById(userInfo._id)
-        !res.error && setData(res.data)
+        // const res = await getById(userInfo._id)
+        // !res.error && setData(res.data)
+        setData(matches)
     }
 
     return (

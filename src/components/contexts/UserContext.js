@@ -4,13 +4,14 @@ import { login } from '../Services/UserService'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { contants } from '../utils/Contants';
 import { loginFacebook } from '../Services/UserService';
+import { users } from '../utils/users'
 
 export const UserContext = createContext()
 
 export const UserContextProvider = props => {
     const { children } = props
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [userInfo, setUserInfo] = useState({});
+    const [userInfo, setUserInfo] = useState(users[0]);
 
     const onLogin = async (email, password) => {
         const res = await login(email, password)

@@ -18,20 +18,22 @@ const Login = ({ navigation }) => {
   const [loading, setLoading] = useState(false)
 
   const login = async () => {
-    try {
-      if (email.trim() === '' || password === '') {
-        alert('Email or password is empty')
-        return
-      }
-      setLoading(true)
-      const res = await onLogin(email, password)
-      res === 1 && setIsLoggedIn(true)
-      res === 0 && alert('Password incorrect')
-      res === -1 && alert('Error network')
-      setLoading(false)
-    } catch (error) {
-      setLoading(false)
-    }
+    // try {
+    //   if (email.trim() === '' || password === '') {
+    //     alert('Email or password is empty')
+    //     return
+    //   }
+    //   setLoading(true)
+    //   const res = await onLogin(email, password)
+    //   res === 1 && setIsLoggedIn(true)
+    //   res === 0 && alert('Password incorrect')
+    //   res === -1 && alert('Error network')
+    //   setLoading(false)
+    // } catch (error) {
+    //   setLoading(false)
+    // }
+
+    setIsLoggedIn(true)
   }
 
   useEffect(() => {
